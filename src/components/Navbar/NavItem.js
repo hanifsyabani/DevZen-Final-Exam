@@ -1,3 +1,4 @@
+
 export const NavItem =[
   {
     id: 1,
@@ -5,22 +6,22 @@ export const NavItem =[
     link: "/",
   },
   {
-    id: 1,
+    id: 2,
     title: "Course",
     link: "/course",
   },
   {
-    id: 1,
+    id: 3,
     title: "Pricing",
     link: "/pricing",
   },
   {
-    id: 1,
+    id: 4,
     title: "FAQ",
     link: "/",
   },
   {
-    id: 1,
+    id: 5,
     title: "Contact US",
     link: "/",
   },
