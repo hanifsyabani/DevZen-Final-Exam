@@ -4,6 +4,9 @@ import { skillHighlight } from './components/Main/Hero/skillHighlight';
 import { AiFeatures } from './components/Main/Ai/AiFeatures';
 import volcadot from './assets/volcadot.png';
 import skillimg from './assets/skillimg.png';
+import { PiTelevisionSimpleBold } from 'react-icons/pi';
+import { MdPushPin } from 'react-icons/md';
+import { FaCloudArrowDown } from 'react-icons/fa6';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
@@ -11,6 +14,8 @@ import { Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import { SkillFeatured } from './components/Main/WhoCanJoin/SkillFeatured';
+import { CourseList } from './components/Course/CourseList';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
@@ -107,7 +112,9 @@ function App() {
             <p className="text-secondary tracking-wide font-semibold">
               SIAPA YANG BISA BERGABUNG
             </p>
-            <h1 className="text-4xl font-bold text-primary max-w-lg my-6">Skema Peningkatan Skill Untuk Semua</h1>
+            <h1 className="text-4xl font-bold text-primary max-w-lg my-6">
+              Skema Peningkatan Skill Untuk Semua
+            </h1>
             <div className="mt-4 grid grid-cols-2 gap-6">
               {SkillFeatured.map((item) => (
                 <div key={item.id} className="w-32">
@@ -115,7 +122,9 @@ function App() {
                     <h1 className="font-bold text-primary">0{item.id}</h1>
                     <img src={item.img} alt="imgwhocanjoin" className="w-16" />
                   </div>
-                  <p className="font-semibold text-sm text-center mt-4">{item.title}</p>
+                  <p className="font-semibold text-sm text-center mt-4">
+                    {item.title}
+                  </p>
                 </div>
               ))}
             </div>
@@ -124,6 +133,69 @@ function App() {
             <img src={skillimg} alt="skillimg" className="w-full" />
           </div>
         </div>
+      </section>
+
+      <section className="mt-20 px-[3%]">
+        <h1 className="text-3xl font-bold text-primary text-center">
+          Popular <span className="text-secondary">Course</span>
+        </h1>
+
+        <div className="mt-6 flex justify-center items-center gap-7 flex-wrap ">
+          {CourseList.map((course) => (
+            <div className="w-[17rem] h-96" key={course.id}>
+              <div className=" bg-primary rounded-xl h-64 ">
+                <img
+                  src={course.img}
+                  alt="courseimg"
+                  className="w-20 mx-auto pt-5"
+                />
+              </div>
+              <div className="bg-white  mx-4 rounded-2xl text-center -mt-32 p-3">
+                <h1 className="text-xl font-bold">{course.title}</h1>
+                <p className="text-xs pt-2">
+                  {course.desc
+                    ? course.desc.length > 50
+                      ? course.desc.slice(0, 70) + '...'
+                      : course.desc
+                    : 'No Description'}
+                </p>
+                <div className="flex justify-center items-center gap-2 mt-4">
+                  <button className="flex items-center justify-center gap-1 border border-secondary p-1 rounded-full ">
+                    <PiTelevisionSimpleBold
+                      size={15}
+                      className="text-secondary"
+                    />
+                    <p className="text-xs text-tertiary font-semibold">
+                      Live Demo
+                    </p>
+                  </button>
+                  <button className="flex items-center justify-center gap-1 border border-secondary p-1 rounded-full ">
+                    <MdPushPin size={15} className="text-secondary" />
+                    <p className="text-xs text-tertiary font-semibold">
+                      Enroll Now
+                    </p>
+                  </button>
+                </div>
+
+                <button className="flex items-center justify-center bg-secondary rounded-full mt-4 mx-auto px-3 py-2 gap-2">
+                  <FaCloudArrowDown size={20} className="text-white" />
+                  <p className="text-white text-sm">Download Curiculum</p>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link to={'/course'}>
+          <div className="flex justify-center items-center mt-4">
+            <button className="bg-primary px-3 py-1 rounded-xl text-white  font-semibold hover:scale-105 transition-all w-52 ">
+              View All Course
+            </button>
+          </div>
+        </Link>
+      </section>
+
+      <section className="mt-20">
+
       </section>
     </>
   );
