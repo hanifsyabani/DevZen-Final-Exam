@@ -1,21 +1,28 @@
 import Navbar from "./components/Navbar/Navbar"
 import heroimg from './assets/heroimg.png'
-import { skillHighlight } from './components/Main/Hero/skillHighlight';
-import { AiFeatures } from './components/Main/Ai/AiFeatures';
+import { skillHighlight } from './components/HomePage/Hero/skillHighlight';
+import { AiFeatures } from './components/HomePage/Ai/AiFeatures';
 import volcadot from './assets/volcadot.png';
 import skillimg from './assets/skillimg.png';
 import { PiTelevisionSimpleBold } from 'react-icons/pi';
 import { MdPushPin } from 'react-icons/md';
-import { FaCloudArrowDown } from 'react-icons/fa6';
+import { FaCloudArrowDown, FaPeopleGroup, FaUsers } from 'react-icons/fa6';
+import achievimg from './assets/achiev.png';
+import mentorsimg from './assets/mentor.jpg';
+import star from './assets/star.png';
+import { IoMdPaper } from 'react-icons/io';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
-import { SkillFeatured } from './components/Main/WhoCanJoin/SkillFeatured';
-import { CourseList } from './components/Course/CourseList';
+import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
+import { CourseList } from './components/HomePage/Course/CourseList';
 import { Link } from 'react-router-dom';
+import Header from './components/Header/Header';
+import CardAchievment from './components/HomePage/Achievment/CardAchievment';
+import { DataMentor } from './components/HomePage/Mentors/DataMentors';
 
 function App() {
   return (
@@ -50,7 +57,7 @@ function App() {
         </div>
       </section>
 
-      <section className="mt-20 w-full px-[3%]  pb-20 relative">
+      <section className="my-20 w-full px-[3%]  relative">
         <div className="flex items-center justify-center">
           <div className="w-1/2">
             <h1 className="text-5xl font-bold text-primary tracking-wide leading-[3.2rem]">
@@ -106,7 +113,7 @@ function App() {
         />
       </section>
 
-      <section className="mt-20 px-[3%]">
+      <section className="mt-56 px-[3%]">
         <div className="flex justify-center items-center gap-20 ">
           <div className="w-1/2">
             <p className="text-secondary tracking-wide font-semibold">
@@ -116,11 +123,15 @@ function App() {
               Skema Peningkatan Skill Untuk Semua
             </h1>
             <div className="mt-4 grid grid-cols-2 gap-6">
-              {SkillFeatured.map((item) => (
-                <div key={item.id} className="w-32">
+              {SkillFeatured.map((item, i) => (
+                <div key={i} className="w-32">
                   <div className="flex items-center gap-4">
                     <h1 className="font-bold text-primary">0{item.id}</h1>
-                    <img src={item.img} alt="imgwhocanjoin" className="w-16" />
+                    <img
+                      src={item.img}
+                      alt="imgwhocanjoin"
+                      className="w-20 h-20"
+                    />
                   </div>
                   <p className="font-semibold text-sm text-center mt-4">
                     {item.title}
@@ -136,21 +147,19 @@ function App() {
       </section>
 
       <section className="mt-20 px-[3%]">
-        <h1 className="text-3xl font-bold text-primary text-center">
-          Popular <span className="text-secondary">Course</span>
-        </h1>
+        <Header title1="Course" title2="Popular" />
 
         <div className="mt-6 flex justify-center items-center gap-7 flex-wrap ">
           {CourseList.map((course) => (
             <div className="w-[17rem] h-96" key={course.id}>
-              <div className=" bg-primary rounded-xl h-64 ">
+              <div className=" bg-primary rounded-xl h-64 shadow-xl ">
                 <img
                   src={course.img}
                   alt="courseimg"
                   className="w-20 mx-auto pt-5"
                 />
               </div>
-              <div className="bg-white  mx-4 rounded-2xl text-center -mt-32 p-3">
+              <div className="bg-white shadow-xl  mx-4 rounded-2xl text-center -mt-32 p-3">
                 <h1 className="text-xl font-bold">{course.title}</h1>
                 <p className="text-xs pt-2">
                   {course.desc
@@ -188,14 +197,102 @@ function App() {
         <Link to={'/course'}>
           <div className="flex justify-center items-center mt-4">
             <button className="bg-primary px-3 py-1 rounded-xl text-white  font-semibold hover:scale-105 transition-all w-52 ">
-              View All Course
+              Lihat Semua Course
             </button>
           </div>
         </Link>
       </section>
 
-      <section className="mt-20">
+      <section className="mt-20 bg-[#F3F3F3] px-[3%] py-10 ">
+        <Header title1="Pencapaian" title2="Kami" />
+        <div className="flex justify-center items-center mt-10 gap-32">
+          <div className="w-1/2">
+            <img src={achievimg} alt="achievementimg" className="w-full" />
+          </div>
+          <div className="w-1/2 px-16">
+            <div
+              className="flex items-center justify-evenly gap-10
+            "
+            >
+              <CardAchievment title={'Students Enrolled'} count={'100'} />
+              <CardAchievment title={'Course tersedia'} count={'50'} />
+            </div>
+            <div className="bg-white rounded-lg shadow-2xl flex justify-center items-center gap-10 mt-5 p-6 ">
+              <h1 className="text-5xl font-extrabold text-secondary">75%</h1>
+              <p className="max-w-46">
+                Para mahasiswa berhasil meraih karir di perusahaan ternama.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section className="px-[3%] mt-20 py-10">
+        <h1 className="text-4xl font-extrabold text-primary max-w-lg">
+          Kenali Mentor & Trainers
+          <span className="text-secondary"> Professional Kami</span>
+        </h1>
+
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={2}
+          loop={true}
+          centeredSlides={true}
+          modules={[Autoplay]}
+          autoplay={{
+            delay:2000,
+            disableOnInteraction:false,
+            pauseOnMouseEnter:true
+          }}
+        >
+          <div className="flex justify-center items-center gap-8">
+            {DataMentor.map((mentor) => (
+              <SwiperSlide>
+                <div className="w-[35rem] bg-white rounded-2xl shadow-2xl p-4 mt-16 cursor-pointer">
+                  <div className="flex justify-evenly gap- items-center">
+                    <div className="w-32 h-32 rounded-full">
+                      <img
+                        src={mentorsimg}
+                        alt="mentor"
+                        className="w-full rounded-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <h1 className="text-2xl font-bold ">{mentor.name}</h1>
+                      <p className="text-lg text-secondary">{mentor.job}</p>
+                      <div className="flex items-center gap-2 my-4 ">
+                        <div className="w-20">
+                          <img
+                            src={star}
+                            alt="star"
+                            width={80}
+                            className="w-full"
+                          />
+                        </div>
+                        <small>{mentor.review} Reviews</small>
+                      </div>
+                      <div className="flex items-center gap-7 text-sm">
+                        <div className="flex items-center gap-3">
+                          <IoMdPaper size={20} className="text-secondary" />
+                          <p>{mentor.modul} Modul</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <FaUsers size={20} className="text-secondary" />
+                          <p>{mentor.review} Pelajar</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-5 px-3 text-sm text-left">{mentor.desc}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </div>
+        </Swiper>
+      </section>
+
+      <section className="mt-20 px-[3%]">
+            
       </section>
     </>
   );

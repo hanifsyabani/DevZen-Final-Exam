@@ -1,0 +1,38 @@
+export const DataMentor = [
+  {
+    id: 1,
+    name: 'Krisstante',
+    review: 20,
+    modul: 21,
+    pelajar: 100,
+    job: 'Software Engineer',
+    desc: 'John adalah seorang Pengembang Perangkat Lunak yang ahli dalam keamanan Cloud, Keamanan Siber, Pusat Data & Forensik selama lebih dari 22 tahun dan melatih 100 siswa untuk menemani tujuan & impian mereka.',
+  },
+  {
+    id: 2,
+    name: 'Lathifah',
+    review: 2,
+    modul: 5,
+    pelajar: 10,
+    job:'Machine Learning Engineer',
+    desc: 'John adalah seorang Pengembang Perangkat Lunak yang ahli dalam keamanan Cloud, Keamanan Siber, Pusat Data & Forensik selama lebih dari 22 tahun dan melatih 100 siswa untuk menemani tujuan & impian mereka.',
+  },
+  {
+    id: 3,
+    name: 'Evans',
+    review: 20,
+    modul: 11,
+    pelajar: 90,
+    job: 'Cyber Security',
+    desc: 'John adalah seorang Pengembang Perangkat Lunak yang ahli dalam keamanan Cloud, Keamanan Siber, Pusat Data & Forensik selama lebih dari 22 tahun dan melatih 100 siswa untuk menemani tujuan & impian mereka.',
+  },
+  {
+    id: 4,
+    name: 'Sans',
+    review: 120,
+    modul: 30,
+    pelajar: 120,
+    job: 'Data Scientist',
+    desc: 'John adalah seorang Pengembang Perangkat Lunak yang ahli dalam keamanan Cloud, Keamanan Siber, Pusat Data & Forensik selama lebih dari 22 tahun dan melatih 100 siswa untuk menemani tujuan & impian mereka.',
+  },
+];

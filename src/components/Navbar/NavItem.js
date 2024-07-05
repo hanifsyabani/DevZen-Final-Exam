@@ -2,7 +2,7 @@
 export const NavItem =[
   {
     id: 1,
-    title: "Home",
+    title: "Beranda",
     link: "/",
   },
   {
@@ -12,7 +12,7 @@ export const NavItem =[
   },
   {
     id: 3,
-    title: "Pricing",
+    title: "Harga",
     link: "/pricing",
   },
   {
@@ -22,7 +22,7 @@ export const NavItem =[
   },
   {
     id: 5,
-    title: "Contact US",
+    title: "Kontak",
     link: "/",
   },
 ]

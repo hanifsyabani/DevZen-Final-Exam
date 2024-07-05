@@ -1,11 +1,11 @@
-import angular from '../../assets/angular.png';
-import aws from '../../assets/aws.png';
-import python from '../../assets/python.png';
-import powerbi from '../../assets/powerbi.png';
-import react from '../../assets/react.png';
-import vue from '../../assets/vue.png';
-import se from '../../assets/se.png';
-import coreui from '../../assets/coreui.png';
+import angular from '../../../assets/angular.png';
+import aws from '../../../assets/aws.png';
+import python from '../../../assets/python.png';
+import powerbi from '../../../assets/powerbi.png';
+import react from '../../../assets/react.png';
+import vue from '../../../assets/vue.png';
+import se from '../../../assets/se.png';
+import coreui from '../../../assets/coreui.png';
 
 export const CourseList = [
   {
