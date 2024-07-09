@@ -4,9 +4,7 @@ import { skillHighlight } from './components/HomePage/Hero/skillHighlight';
 import { AiFeatures } from './components/HomePage/Ai/AiFeatures';
 import volcadot from './assets/volcadot.png';
 import skillimg from './assets/skillimg.png';
-import { PiTelevisionSimpleBold } from 'react-icons/pi';
-import { MdPushPin } from 'react-icons/md';
-import { FaCloudArrowDown, FaPeopleGroup, FaUsers } from 'react-icons/fa6';
+import {  FaUsers } from 'react-icons/fa6';
 import achievimg from './assets/achiev.png';
 import mentorsimg from './assets/mentor.jpg';
 import star from './assets/star.png';
@@ -14,21 +12,46 @@ import { IoMdPaper } from 'react-icons/io';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-
-// Import Swiper styles
 import 'swiper/css';
+
 import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
-import { CourseList } from './components/HomePage/Course/CourseList';
 import { Link } from 'react-router-dom';
 import Header from './components/Header/Header';
 import CardAchievment from './components/HomePage/Achievment/CardAchievment';
 import { DataMentor } from './components/HomePage/Mentors/DataMentors';
+import Footer from "./components/Footer/Footer";
+import CardCourse from "./components/HomePage/Course/CardCourse";
+import { useEffect, useState } from "react";
+import { collection, getDocs, limit, query } from "firebase/firestore";
+import { db } from "./service/Firebase";
 
 function App() {
+
+  const [course, setcourse] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const courseCollection = collection(db, 'course');
+      const courseQuery = query(courseCollection, limit(8));
+      try {
+        const courseSnapshot = await getDocs(courseQuery);
+
+        const courseList = courseSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setcourse(courseList);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, []);
+
   return (
     <>
       <Navbar />
-
       <section className="px-[3%] py-20 flex font-sans">
         <div className="w-1/2 pt-16">
           <h1 className="text-6xl  font-bold text-primary max-w-xl">
@@ -150,48 +173,8 @@ function App() {
         <Header title1="Course" title2="Popular" />
 
         <div className="mt-6 flex justify-center items-center gap-7 flex-wrap ">
-          {CourseList.map((course) => (
-            <div className="w-[17rem] h-96" key={course.id}>
-              <div className=" bg-primary rounded-xl h-64 shadow-xl ">
-                <img
-                  src={course.img}
-                  alt="courseimg"
-                  className="w-20 mx-auto pt-5"
-                />
-              </div>
-              <div className="bg-white shadow-xl  mx-4 rounded-2xl text-center -mt-32 p-3">
-                <h1 className="text-xl font-bold">{course.title}</h1>
-                <p className="text-xs pt-2">
-                  {course.desc
-                    ? course.desc.length > 50
-                      ? course.desc.slice(0, 70) + '...'
-                      : course.desc
-                    : 'No Description'}
-                </p>
-                <div className="flex justify-center items-center gap-2 mt-4">
-                  <button className="flex items-center justify-center gap-1 border border-secondary p-1 rounded-full ">
-                    <PiTelevisionSimpleBold
-                      size={15}
-                      className="text-secondary"
-                    />
-                    <p className="text-xs text-tertiary font-semibold">
-                      Live Demo
-                    </p>
-                  </button>
-                  <button className="flex items-center justify-center gap-1 border border-secondary p-1 rounded-full ">
-                    <MdPushPin size={15} className="text-secondary" />
-                    <p className="text-xs text-tertiary font-semibold">
-                      Enroll Now
-                    </p>
-                  </button>
-                </div>
-
-                <button className="flex items-center justify-center bg-secondary rounded-full mt-4 mx-auto px-3 py-2 gap-2">
-                  <FaCloudArrowDown size={20} className="text-white" />
-                  <p className="text-white text-sm">Download Curiculum</p>
-                </button>
-              </div>
-            </div>
+          {course.map((course) => (
+            <CardCourse course={course} key={course.id}/>
           ))}
         </div>
         <Link to={'/course'}>
@@ -240,15 +223,17 @@ function App() {
           centeredSlides={true}
           modules={[Autoplay]}
           autoplay={{
-            delay:2000,
-            disableOnInteraction:false,
-            pauseOnMouseEnter:true
+            delay: 2000,
+            disableOnInteraction: false,
           }}
         >
-          <div className="flex justify-center items-center gap-8">
+          <div className="flex justify-center items-center">
             {DataMentor.map((mentor) => (
               <SwiperSlide>
-                <div className="w-[35rem] bg-white rounded-2xl shadow-2xl p-4 mt-16 cursor-pointer">
+                <div
+                  className="w-[30rem] bg-white rounded-2xl shadow-2xl p-4 mt-16 cursor-pointer"
+                  key={mentor.id}
+                >
                   <div className="flex justify-evenly gap- items-center">
                     <div className="w-32 h-32 rounded-full">
                       <img
@@ -283,7 +268,7 @@ function App() {
                       </div>
                     </div>
                   </div>
-                  <p className="mt-5 px-3 text-sm text-left">{mentor.desc}</p>
+                  <p className="mt-5 px-3 text-sm text-left text-gray-800 leading-6">{mentor.desc}</p>
                 </div>
               </SwiperSlide>
             ))}
@@ -291,9 +276,7 @@ function App() {
         </Swiper>
       </section>
 
-      <section className="mt-20 px-[3%]">
-            
-      </section>
+      <Footer/>
     </>
   );
 }

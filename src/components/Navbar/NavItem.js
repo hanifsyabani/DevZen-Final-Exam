@@ -18,11 +18,11 @@ export const NavItem =[
   {
     id: 4,
     title: "FAQ",
-    link: "/",
+    link: "/faq",
   },
   {
     id: 5,
     title: "Kontak",
-    link: "/",
+    link: "/kontak",
   },
 ]
