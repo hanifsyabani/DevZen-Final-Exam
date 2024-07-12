@@ -11,10 +11,22 @@ import { IoMdAdd } from 'react-icons/io';
 import { faq } from '../components/faq/faqItem';
 import Footer from '../components/Footer/Footer';
 import vol from '../assets/vol_faq.png';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Faq() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+
   return (
-    <div className="relative">
+    <main className="relative">
       <Navbar />
       <div className="pb-72 pt-32  px-[5%] bg-secondary rounded-b-[10rem]">
         <h1 className="text-center text-4xl text-white font-bold">
@@ -57,6 +69,6 @@ export default function Faq() {
       </div>
 
       <Footer />
-    </div>
+    </main>
   );
 }

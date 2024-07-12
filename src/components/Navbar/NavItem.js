@@ -13,7 +13,7 @@ export const NavItem =[
   {
     id: 3,
     title: "Harga",
-    link: "/pricing",
+    link: "/price",
   },
   {
     id: 4,
@@ -23,6 +23,6 @@ export const NavItem =[
   {
     id: 5,
     title: "Kontak",
-    link: "/kontak",
+    link: "/contact",
   },
 ]

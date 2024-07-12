@@ -7,6 +7,7 @@ import CardCourse from '../components/HomePage/Course/CardCourse';
 import Footer from '../components/Footer/Footer';
 import { FaSearch } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
+import { useLocation } from 'react-router-dom';
 
 export default function Course() {
   const [course, setcourse] = useState([]);
@@ -16,7 +17,10 @@ export default function Course() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
+  
     const getData = async () => {
       const courseCollection = collection(db, 'course');
 
@@ -38,8 +42,12 @@ export default function Course() {
   }, []);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     filterCourse();
-  }, [filter, course]);
+  }, [filter, course, pathname]);
 
   const filterCourse = () => {
     let filtered = [...course];

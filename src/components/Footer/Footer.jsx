@@ -43,7 +43,7 @@ export default function Footer() {
           </h1>
           <ul className="mt-4 text-white">
             {quicklinks.map((link) => (
-              <li className="mb-3 hover:text-secondary cursor-pointer">{link.title}</li>
+              <li className="mb-3 hover:text-secondary cursor-pointer" key={link.id}>{link.title}</li>
             ))}
           </ul>
         </div>

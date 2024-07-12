@@ -15,7 +15,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import CardAchievment from './components/HomePage/Achievment/CardAchievment';
 import { DataMentor } from './components/HomePage/Mentors/DataMentors';
@@ -28,7 +28,13 @@ import { db } from "./service/Firebase";
 function App() {
 
   const [course, setcourse] = useState([]);
+  const { pathname } = useLocation();
+
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     const getData = async () => {
       const courseCollection = collection(db, 'course');
       const courseQuery = query(courseCollection, limit(8));
@@ -47,7 +53,7 @@ function App() {
     };
 
     getData();
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -146,8 +152,8 @@ function App() {
               Skema Peningkatan Skill Untuk Semua
             </h1>
             <div className="mt-4 grid grid-cols-2 gap-6">
-              {SkillFeatured.map((item, i) => (
-                <div key={i} className="w-32">
+              {SkillFeatured.map((item) => (
+                <div key={item.id} className="w-36">
                   <div className="flex items-center gap-4">
                     <h1 className="font-bold text-primary">0{item.id}</h1>
                     <img
@@ -169,7 +175,7 @@ function App() {
         </div>
       </section>
 
-      <section className="mt-20 px-[3%]">
+      <section className="mt-44 px-[3%]">
         <Header title1="Course" title2="Popular" />
 
         <div className="mt-6 flex justify-center items-center gap-7 flex-wrap ">

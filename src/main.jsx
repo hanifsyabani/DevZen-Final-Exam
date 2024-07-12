@@ -7,6 +7,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Course from './pages/Course.jsx';
 import Faq from './pages/Faq.jsx';
 import { ChakraProvider } from '@chakra-ui/react';
+import Contact from './pages/Contact.jsx';
+import Price from './pages/Price.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +25,22 @@ const router = createBrowserRouter([
     path: '/faq',
     element: <Faq />,
   },
+  {
+    path:'/contact',
+    element: <Contact />,
+  },
+  {
+    path: '/price',
+    element: <Price/>
+  },
+  {
+    path: '/login',
+    element: <Login/>
+  },
+  {
+    path: '/register',
+    element: <Register/>
+  }
 ]);
 
 

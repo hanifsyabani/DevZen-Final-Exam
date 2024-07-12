@@ -6,11 +6,11 @@ export default function Navbar() {
   return (
     <nav className="flex justify-center mt-4">
       <div className="flex justify-between items-center px-[5%] py-2 fixed w-[90%] rounded-full bg-white/70 backdrop-blur-md shadow-lg z-10">
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <img src={logo} />
           <div>
             <h5 className="font-extrabold text-2xl text-primary">Dev</h5>
-            <p className="text-secondary text-lg">Zen</p>
+            <p className="text-secondary text-lg -mt-2 font-semibold">Zen</p>
           </div>
         </div>
         <ul className="flex items-center gap-10">
