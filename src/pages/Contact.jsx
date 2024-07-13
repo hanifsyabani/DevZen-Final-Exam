@@ -83,8 +83,6 @@ export default function Contact() {
     }
   }
 
-
-
   return (
     <main className="relative">
       <Navbar />
@@ -95,10 +93,10 @@ export default function Contact() {
       </div>
       <img src={vol} alt="vol" className="absolute left-5  w-20 -z-10" />
       <div className="w-[90%] mx-auto -mt-56">
-        <div className=" bg-white p-20 rounded-xl shadow-xl ">
+        <div className=" bg-white lg:p-20 p-7 rounded-xl shadow-xl ">
           <form onSubmit={handleSubmit}>
-            <div className="flex justify-center items-center gap-10">
-              <div className="w-1/2">
+            <div className="lg:flex justify-center items-center gap-10">
+              <div className="lg:w-1/2">
                 <FormControl isRequired className="mb-4">
                   <FormLabel>Nama Lengkap</FormLabel>
                   <Input
@@ -125,7 +123,7 @@ export default function Contact() {
                   />
                 </FormControl>
               </div>
-              <div className="w-1/2">
+              <div className="lg:w-1/2">
                 <FormControl isRequired className="mb-4">
                   <FormLabel>Contact Email</FormLabel>
                   <Input
@@ -187,9 +185,9 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-20 my-32 ">
+      <div className="lg:flex justify-center items-center gap-20 my-32 ">
         {contactItem.map((item, i) => (
-          <div className="w-[30rem] p-4 shadow-sm text-center cursor-pointer group" key={i}>
+          <div className="lg:w-[30rem] p-4 shadow-sm text-center cursor-pointer group mb-10 lg:mb-0" key={i}>
             <img src={item.img} alt="email" className="w-20 mx-auto group-hover:scale-110 transition-all" />
             <h1 className='font-semibold my-6'>{item.desc}</h1>
             <p className='text-primary font-semibold'>{item.link}</p>

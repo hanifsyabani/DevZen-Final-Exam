@@ -28,7 +28,7 @@ export default function Faq() {
   return (
     <main className="relative">
       <Navbar />
-      <div className="pb-72 pt-32  px-[5%] bg-secondary rounded-b-[10rem]">
+      <div className="pb-72 pt-32 px-[5%] bg-secondary rounded-b-[10rem]">
         <h1 className="text-center text-4xl text-white font-bold">
           Pertanyaan yang Sering Diajukan
         </h1>
@@ -37,7 +37,7 @@ export default function Faq() {
       <div className="w-[90%] mx-auto -mt-56">
         <Accordion
           allowMultiple
-          className=" bg-white p-10 rounded-xl shadow-xl "
+          className=" bg-white lg:p-10 p-3 rounded-xl shadow-xl "
         >
           {faq.map((item, index) => (
             <AccordionItem key={index} className="pb-10">

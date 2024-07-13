@@ -4,7 +4,7 @@ import { SlBookOpen } from 'react-icons/sl';
 
 export default function CardAchievment({ title, count }) {
   return (
-    <div className="w-44 h-44 bg-white rounded-lg shadow-2xl flex justify-center items-center">
+    <div className="w-44 h-44  bg-white rounded-lg shadow-2xl flex justify-center items-center">
       <div>
         <h1 className="text-5xl font-extrabold text-primary text-center">
           <CountUp start={0} end={count} duration={5} />

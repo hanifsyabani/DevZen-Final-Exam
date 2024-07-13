@@ -8,8 +8,8 @@ import { MdEmail } from "react-icons/md";
 export default function Footer() {
   return (
     <footer className="mt-20 bg-primary px-[5%] py-10">
-      <div className="flex justify-between ">
-        <div className="">
+      <div className="lg:flex justify-between ">
+        <div >
           <div className="flex items-center gap-3 ">
             <img src={logo} alt="logo" />
             <h1 className="text-2xl font-bold text-white">
@@ -28,7 +28,7 @@ export default function Footer() {
             <div className="flex items-center">
               <input
                 type="text"
-                className="bg-white p-3 rounded-tl-lg rounded-bl-lg w-52 text-primary placeholder:text-primary"
+                className="bg-white p-3 rounded-tl-lg rounded-bl-lg lg:w-52 w-full text-primary placeholder:text-primary"
                 placeholder="Enter your email..."
               />
               <button className="w-10 p-2 bg-secondary text-white text-2xl rounded-tr-lg rounded-br-lg">
@@ -37,7 +37,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div>
+        <div className='lg:mt-0 mt-10'>
           <h1 className="text-xl text-white font-bold">
             Quick <span className="text-secondary">Links</span>
           </h1>
@@ -48,7 +48,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className='lg:mt-0 mt-10'>
           <h1 className="text-xl text-white font-bold">
             Kontak <span className="text-secondary">Kami</span>
           </h1>
@@ -70,9 +70,9 @@ export default function Footer() {
       </div>
 
       <div className='flex justify-between items-center mt-16'>
-        <div className='flex items-center gap-12'>
+        <div className='lg:flex items-center gap-12'>
           <p className='text-white hover:text-secondary cursor-pointer'>Terms & Condition</p>
-          <p className='text-white hover:text-secondary cursor-pointer'>Privacy Policy</p>
+          <p className='text-white hover:text-secondary cursor-pointer mt-2 lg:mt-0'>Privacy Policy</p>
         </div>
         <div className='flex items-center gap-5 text-white'>
           <FaFacebook size={20} className='cursor-pointer hover:text-secondary' />

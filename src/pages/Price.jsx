@@ -18,24 +18,24 @@ export default function Price() {
   return (
     <main className="relative">
       <Navbar />
-      <div className="  text-center bg-blue-900 text-white pt-32 pb-96 rounded-b-[10rem]">
+      <div className="text-center bg-blue-900 text-white pt-32 pb-96 rounded-b-[10rem]">
         <h1 className="text-4xl font-bold">
           Harga <span className="text-secondary">Kami</span>
         </h1>
       </div>
 
-      <img src={vol} alt="volcadot" className="absolute left-5  w-20 -z-10" />
-      <img src={vol} alt="volcadot" className="absolute right-5  w-20 -z-10" />
+      <img src={vol} alt="volcadot" className="absolute left-5 w-20 -z-10 " />
+      <img src={vol} alt="volcadot" className="absolute right-5   w-20 -z-10" />
 
-      <div className="flex justify-center space-x-8 -mt-52 pb-20">
+      <div className="lg:flex justify-center lg:space-x-8 lg:-mt-52 -mt-60 lg:pb-20  px-6 lg:px-0">
         {PriceItem.map((item) => (
           <div
-            className={` ${item.id === 2 ? 'w-[22rem]' : 'w-[22rem]'}  bg-white rounded-3xl shadow-2xl`}
+            className={`lg:w-[22rem] w-full bg-white rounded-3xl shadow-2xl mb-32 lg:mb-0 pb-4`}
           >
             <div
-              className={`bg-secondary text-center py-10 rounded-t-3xl relative ${item.id === 2 ? '-mt-10' : ''}`}
+              className={`bg-secondary text-center py-10 rounded-t-3xl relative ${item.id === 2 ? 'lg:-mt-10' : ''}`}
             >
-              <div className="bg-white border border-secondary rounded-xl w-[50%] px-4 py-1 absolute -top-10 left-1/2 transform -translate-x-1/2">
+              <div className="bg-white border border-secondary rounded-xl lg:w-[50%] px-4 py-1 absolute -top-10 left-1/2 transform -translate-x-1/2">
                 <h1 className="text-secondary font-semibold text-lg">
                   {item.category}
                 </h1>
@@ -58,7 +58,7 @@ export default function Price() {
               </div>
             </div>
             <div className="flex justify-center items-center">
-              <button className="w-44 border border-secondary px-2 py-3 text-center text-secondary rounded-xl font-semibold ">
+              <button className="w-44 border border-secondary px-2 py-3 text-center text-secondary rounded-xl font-semibold hover:bg-secondary hover:border-white hover:text-white ease-linear duration-300 ">
                 Pilih Plan
               </button>
             </div>

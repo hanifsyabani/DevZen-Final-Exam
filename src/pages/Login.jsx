@@ -11,9 +11,9 @@ export default function Login() {
           <p className="text-secondary text-lg -mt-2 font-semibold">Zen</p>
         </div>
       </Link>
-      <div className="flex justify-center items-center gap-20 p-14 ">
-        <div className="w-1/2">
-          <div className="bg-white shadow-2xl p-10 w-full rounded-3xl ">
+      <div className="flex flex-col-reverse lg:flex-row  justify-center items-center gap-20 lg:p-14 p-6 ">
+        <div className="lg:w-1/2 -mt-14 lg:mt-0">
+          <div className="bg-white shadow-2xl lg:p-10 p-4 w-full rounded-3xl ">
             <h1 className="text-3xl font-bold text-center text-primary">
               Log in
             </h1>
@@ -51,7 +51,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <div className="w-[60%] ">
+        <div className="lg:w-[60%] ">
           <img src={imglogin} alt="login" className="w-full" />
         </div>
       </div>

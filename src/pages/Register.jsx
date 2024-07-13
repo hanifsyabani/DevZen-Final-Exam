@@ -11,9 +11,9 @@ export default function Register() {
           <p className="text-secondary text-lg -mt-2 font-semibold">Zen</p>
         </div>
       </Link>
-      <div className="flex justify-center items-center gap-20 p-8">
-        <div className="w-1/2">
-          <div className="bg-white shadow-2xl p-8 w-full rounded-3xl ">
+      <div className="lg:flex justify-center items-center gap-20 p-8">
+        <div className="lg:w-1/2">
+          <div className="bg-white shadow-2xl lg:p-8 p-4 w-full rounded-3xl ">
             <h1 className="text-3xl font-bold text-center text-primary">
               Register
             </h1>
@@ -65,7 +65,7 @@ export default function Register() {
             </div>
           </div>
         </div>
-        <div className="w-[60%] ">
+        <div className="lg:w-[60%] mt-10 lg:mt-0 ">
           <img src={imglogin} alt="login" className="w-full" />
         </div>
       </div>

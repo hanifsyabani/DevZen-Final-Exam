@@ -58,9 +58,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <section className="px-[3%] py-20 flex font-sans">
-        <div className="w-1/2 pt-16">
-          <h1 className="text-6xl  font-bold text-primary max-w-xl">
+      <section className="px-[3%] py-20 lg:flex font-sans">
+        <div className="lg:w-1/2 pt-16">
+          <h1 className="lg:text-6xl text-5xl font-bold text-primary lg:max-w-xl">
             Transformasi Diri untuk Masa Depan Gemilang
           </h1>
           <p className="pt-6 text-lg text-tertiary max-w-md">
@@ -81,23 +81,32 @@ function App() {
           </div>
         </div>
 
-        <div className="w-1/2">
+        <div className="lg:w-1/2">
           <img src={heroimg} />
         </div>
       </section>
 
       <section className="my-20 w-full px-[3%]  relative">
-        <div className="flex items-center justify-center">
-          <div className="w-1/2">
-            <h1 className="text-5xl font-bold text-primary tracking-wide leading-[3.2rem]">
+        <div className="lg:flex items-center justify-center">
+          <div className="lg:w-1/2">
+            <h1 className="lg:text-5xl text-4xl font-bold text-primary tracking-wide leading-[3.2rem]">
               Platform Pembelajaran Online{' '}
               <span className="text-secondary">Berbasis AI di Indonesia</span>
             </h1>
           </div>
 
-          <div className="w-1/2">
+          <div className="lg:w-1/2 mt-10 lg:mt-0">
             <Swiper
-              slidesPerView={'auto'}
+              breakpoints={{
+                320:{
+                  slidesPerView: 1,
+                  spaceBetween: 30,
+                },
+                768: {
+                  slidesPerView: 'auto',
+                  spaceBetween: 30,
+                },
+              }}
               className="mySwiper"
               spaceBetween={30}
               modules={[Autoplay]}
@@ -111,16 +120,16 @@ function App() {
                 {AiFeatures.map((item) => (
                   <SwiperSlide>
                     <div
-                      className="bg-[#FFF2EA] rounded-lg flex items-center justify-between text-left h-52 p-4 gap-2 cursor-pointer border border-secondary"
+                      className="bg-[#FFF2EA] rounded-lg flex items-center w-full justify-between text-left h-52 p-4 gap-2 cursor-pointer border border-secondary"
                       key={item.id}
                     >
-                      <div className="w-[50%]">
+                      <div className="lg:w-1/2">
                         <h1 className="text-2xl">Ai Based</h1>
                         <h1 className="text-2xl font-bold text-secondary">
                           {item.title}
                         </h1>
                       </div>
-                      <div className="w-1/2">
+                      <div className="lg:w-1/2 w-32">
                         <img
                           src={item.img}
                           alt="imgai"
@@ -143,8 +152,8 @@ function App() {
       </section>
 
       <section className="mt-56 px-[3%]">
-        <div className="flex justify-center items-center gap-20 ">
-          <div className="w-1/2">
+        <div className="lg:flex justify-center items-center gap-20 ">
+          <div className="lg:w-1/2">
             <p className="text-secondary tracking-wide font-semibold">
               SIAPA YANG BISA BERGABUNG
             </p>
@@ -169,18 +178,18 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="w-[40%]">
+          <div className="w-[40%] hidden lg:block">
             <img src={skillimg} alt="skillimg" className="w-full" />
           </div>
         </div>
       </section>
 
-      <section className="mt-44 px-[3%]">
+      <section className="lg:mt-44 mt-32 px-[3%]">
         <Header title1="Course" title2="Popular" />
 
-        <div className="mt-6 flex justify-center items-center gap-7 flex-wrap ">
+        <div className="mt-6 grid grid-cols-2  lg:flex justify-center items-center gap-7 flex-wrap ">
           {course.map((course) => (
-            <CardCourse course={course} key={course.id}/>
+            <CardCourse course={course} key={course.id} />
           ))}
         </div>
         <Link to={'/course'}>
@@ -194,13 +203,13 @@ function App() {
 
       <section className="mt-20 bg-[#F3F3F3] px-[3%] py-10 ">
         <Header title1="Pencapaian" title2="Kami" />
-        <div className="flex justify-center items-center mt-10 gap-32">
-          <div className="w-1/2">
+        <div className="lg:flex justify-center items-center mt-10 gap-32">
+          <div className="lg:w-1/2">
             <img src={achievimg} alt="achievementimg" className="w-full" />
           </div>
-          <div className="w-1/2 px-16">
+          <div className="lg:w-1/2 lg:px-16">
             <div
-              className="flex items-center justify-evenly gap-10
+              className="flex items-center justify-evenly gap-10 mt-10 lg:mt-0
             "
             >
               <CardAchievment title={'Students Enrolled'} count={'100'} />
@@ -224,7 +233,16 @@ function App() {
 
         <Swiper
           spaceBetween={10}
-          slidesPerView={2}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+          }}
           loop={true}
           centeredSlides={true}
           modules={[Autoplay]}
@@ -235,13 +253,13 @@ function App() {
         >
           <div className="flex justify-center items-center">
             {DataMentor.map((mentor) => (
-              <SwiperSlide>
+              <SwiperSlide >
                 <div
                   className="w-[30rem] bg-white rounded-2xl shadow-2xl p-4 mt-16 cursor-pointer"
                   key={mentor.id}
                 >
                   <div className="flex justify-evenly gap- items-center">
-                    <div className="w-32 h-32 rounded-full">
+                    <div className="lg:w-32 lg:h-32 h-20 w-20  rounded-full">
                       <img
                         src={mentorsimg}
                         alt="mentor"
@@ -249,8 +267,8 @@ function App() {
                       />
                     </div>
                     <div className="text-left">
-                      <h1 className="text-2xl font-bold ">{mentor.name}</h1>
-                      <p className="text-lg text-secondary">{mentor.job}</p>
+                      <h1 className="lg:text-2xl text-xl font-bold ">{mentor.name}</h1>
+                      <p className="lg:text-lg text-secondary">{mentor.job}</p>
                       <div className="flex items-center gap-2 my-4 ">
                         <div className="w-20">
                           <img
@@ -274,7 +292,9 @@ function App() {
                       </div>
                     </div>
                   </div>
-                  <p className="mt-5 px-3 text-sm text-left text-gray-800 leading-6">{mentor.desc}</p>
+                  <p className="mt-5 px-3 text-sm text-left text-gray-800 leading-6">
+                    {mentor.desc}
+                  </p>
                 </div>
               </SwiperSlide>
             ))}
@@ -282,7 +302,7 @@ function App() {
         </Swiper>
       </section>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

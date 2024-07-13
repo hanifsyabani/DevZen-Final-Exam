@@ -76,19 +76,19 @@ export default function Course() {
         <Header title1={'Course'} title2={'List'} />
 
         <div className="flex justify-between items-center my-10 px-[3%] relative">
-          <FaSearch size={20} className="text-primary absolute left-12" />
+          <FaSearch size={20} className="text-primary absolute lg:left-12 left-4" />
           <input
             type="search"
-            className="pl-10 pr-2 py-2 w-80 outline-none placeholder:text-sm rounded-xl bg-gray-200 text-sm"
+            className="pl-10 pr-2 py-2 lg:w-80 w-44 outline-none placeholder:text-sm rounded-xl bg-gray-200 text-sm"
             placeholder="Cari Course anda disini..."
           />
 
           <div className="text-sm flex gap-2">
-            <label htmlFor="">Sort by</label>
+            <label htmlFor="filter" className='hidden lg:block'>Sort by</label>
             <select
               name="filter"
               id="filter"
-              className="font-semibold"
+              className="font-semibold outline-none"
               onChange={(e) => setFilter(e.target.value)}
             >
               <option value="all">Semua</option>
@@ -99,7 +99,7 @@ export default function Course() {
           </div>
         </div>
 
-        <div className="mt-6 flex justify-center items-center gap-7 flex-wrap bg-gray-100 py-4 ">
+        <div className="mt-6 lg:flex justify-center grid grid-cols-2 lg:grid-cols-4 items-center lg:gap-7 gap-4 lg:flex-wrap bg-gray-100 py-4 px-2 lg:px-0 ">
           {fillteredCourse
             .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
             .map((course) => (
