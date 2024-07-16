@@ -1,10 +1,22 @@
-import Navbar from "./components/Navbar/Navbar"
-import heroimg from './assets/heroimg.png'
+import React, { useEffect, useState, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+import Navbar from './components/Navbar/Navbar';
 import { skillHighlight } from './components/HomePage/Hero/skillHighlight';
 import { AiFeatures } from './components/HomePage/Ai/AiFeatures';
+import CardCourse from './components/HomePage/Course/CardCourse';
+import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
+import Example from './components/HomePage/Gallery/Gallery';
+import { TextParallaxContentExample } from './components/HomePage/Gallery/TextParallax';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import CardAchievment from './components/HomePage/Achievment/CardAchievment';
+import { DataMentor } from './components/HomePage/Mentors/DataMentors';
+
+import heroimg from './assets/heroimg.png';
 import volcadot from './assets/volcadot.png';
 import skillimg from './assets/skillimg.png';
-import {  FaUsers } from 'react-icons/fa6';
+import { FaUsers } from 'react-icons/fa6';
 import achievimg from './assets/achiev.png';
 import mentorsimg from './assets/mentor.jpg';
 import star from './assets/star.png';
@@ -14,19 +26,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
-import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
-import { Link, useLocation } from 'react-router-dom';
-import Header from './components/Header/Header';
-import CardAchievment from './components/HomePage/Achievment/CardAchievment';
-import { DataMentor } from './components/HomePage/Mentors/DataMentors';
-import Footer from "./components/Footer/Footer";
-import CardCourse from "./components/HomePage/Course/CardCourse";
-import { useEffect, useState } from "react";
-import { collection, getDocs, limit, query } from "firebase/firestore";
-import { db } from "./service/Firebase";
+import { collection, getDocs, limit, query } from 'firebase/firestore';
+import { db } from './service/Firebase';
+
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from 'framer-motion';
+
+import { wrap } from '@motionone/utils';
 
 function App() {
-
   const [course, setcourse] = useState([]);
   const { pathname } = useLocation();
 
@@ -35,6 +50,7 @@ function App() {
       top: 0,
       behavior: 'smooth',
     });
+
     const getData = async () => {
       const courseCollection = collection(db, 'course');
       const courseQuery = query(courseCollection, limit(8));
@@ -55,20 +71,83 @@ function App() {
     getData();
   }, [pathname]);
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  function ParallaxText({ children, baseVelocity = 100 }) {
+    const baseX = useMotionValue(0);
+    const { scrollY } = useScroll();
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, {
+      damping: 50,
+      stiffness: 400,
+    });
+    const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+      clamp: false,
+    });
+
+    const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+
+    const directionFactor = useRef(1);
+    useAnimationFrame((t, delta) => {
+      let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+      if (velocityFactor.get() < 0) {
+        directionFactor.current = -1;
+      } else if (velocityFactor.get() > 0) {
+        directionFactor.current = 1;
+      }
+
+      moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+      baseX.set(baseX.get() + moveBy);
+    });
+
+    return (
+      <div className="parallax">
+        <motion.div
+          className="scroller text-5xl text-primary font-sans opacity-30 "
+          style={{ x }}
+        >
+          <span>{children} </span>
+          <img src="/logo.svg" alt="logo" />
+          <span className="text-secondary">{children} </span>
+          <img src="/logo.svg" alt="logo" />
+          <span>{children} </span>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <>
+      <motion.div className="progress-bar" style={{ scaleX }} />
       <Navbar />
       <section className="px-[3%] py-20 lg:flex font-sans">
         <div className="lg:w-1/2 pt-16">
-          <h1 className="lg:text-6xl text-5xl font-bold text-primary lg:max-w-xl">
+          <motion.h1
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.9 }}
+            className="lg:text-6xl text-5xl font-bold text-primary lg:max-w-xl"
+          >
             Transformasi Diri untuk Masa Depan Gemilang
-          </h1>
-          <p className="pt-6 text-lg text-tertiary max-w-md">
+          </motion.h1>
+          <motion.p
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.9 }}
+            className="pt-6 text-lg text-tertiary max-w-md"
+          >
             Dapatkan skill yang anda butuhkan untuk mencapai masa depan
-          </p>
+          </motion.p>
 
           <div className="flex items-center flex-wrap gap-4 mt-14">
-            {skillHighlight.map((item) => (
+            {skillHighlight.map((item, index) => (
               <div
                 key={item.id}
                 className="bg-[#F2F4F8] hover:bg-secondary ease-linear duration-300 py-2 px-4 rounded-lg w-46 group text-center cursor-pointer"
@@ -81,9 +160,19 @@ function App() {
           </div>
         </div>
 
-        <div className="lg:w-1/2">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.8 }}
+          className="lg:w-1/2"
+        >
           <img src={heroimg} />
-        </div>
+        </motion.div>
+      </section>
+
+      <section className="mb-32">
+        <ParallaxText baseVelocity={-5}>Dev Zen Course</ParallaxText>
+        <ParallaxText baseVelocity={5}>Temukan kursus terbaik </ParallaxText>
       </section>
 
       <section className="my-20 w-full px-[3%]  relative">
@@ -98,7 +187,7 @@ function App() {
           <div className="lg:w-1/2 mt-10 lg:mt-0">
             <Swiper
               breakpoints={{
-                320:{
+                320: {
                   slidesPerView: 1,
                   spaceBetween: 30,
                 },
@@ -225,6 +314,10 @@ function App() {
         </div>
       </section>
 
+      <section>
+        <Example />
+      </section>
+
       <section className="px-[3%] mt-20 py-10">
         <h1 className="text-4xl font-extrabold text-primary max-w-lg">
           Kenali Mentor & Trainers
@@ -253,7 +346,7 @@ function App() {
         >
           <div className="flex justify-center items-center">
             {DataMentor.map((mentor) => (
-              <SwiperSlide >
+              <SwiperSlide>
                 <div
                   className="w-[30rem] bg-white rounded-2xl shadow-2xl p-4 mt-16 cursor-pointer"
                   key={mentor.id}
@@ -267,7 +360,9 @@ function App() {
                       />
                     </div>
                     <div className="text-left">
-                      <h1 className="lg:text-2xl text-xl font-bold ">{mentor.name}</h1>
+                      <h1 className="lg:text-2xl text-xl font-bold ">
+                        {mentor.name}
+                      </h1>
                       <p className="lg:text-lg text-secondary">{mentor.job}</p>
                       <div className="flex items-center gap-2 my-4 ">
                         <div className="w-20">
@@ -302,9 +397,13 @@ function App() {
         </Swiper>
       </section>
 
+      <section>
+        <TextParallaxContentExample />
+      </section>
+
       <Footer />
     </>
   );
 }
 
-export default App
+export default App;

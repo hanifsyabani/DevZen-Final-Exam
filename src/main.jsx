@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Course from './pages/Course.jsx';
 import Faq from './pages/Faq.jsx';
@@ -11,6 +10,8 @@ import Contact from './pages/Contact.jsx';
 import Price from './pages/Price.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+
+
 
 const router = createBrowserRouter([
   {
