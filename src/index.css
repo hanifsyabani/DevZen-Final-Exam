@@ -62,7 +62,7 @@
 }
 
 .parallax .scroller {
-  font-weight: 600;
+  font-weight: 900;
   text-transform: uppercase;
   font-size: 64px;
   display: flex;
@@ -74,4 +74,5 @@
 .parallax span {
   display: block;
   margin-right: 30px;
+  
 }

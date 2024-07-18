@@ -12,7 +12,6 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -27,23 +26,22 @@ const router = createBrowserRouter([
     element: <Faq />,
   },
   {
-    path:'/contact',
+    path: '/contact',
     element: <Contact />,
   },
   {
     path: '/price',
-    element: <Price/>
+    element: <Price />,
   },
   {
     path: '/login',
-    element: <Login/>
+    element: <Login />,
   },
   {
     path: '/register',
-    element: <Register/>
-  }
+    element: <Register />,
+  },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

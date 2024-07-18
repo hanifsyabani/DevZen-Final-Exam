@@ -6,17 +6,23 @@ import Footer from '../components/Footer/Footer';
 import { PriceItem } from '../components/Price/PriceItem';
 import { useEffect } from 'react';
 import vol from '../assets/vol_faq.png';
+import { motion } from 'framer-motion';
 
 export default function Price() {
-
-  useEffect(() =>{
+  useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
-    })
-  })
+      behavior: 'smooth',
+    });
+  });
   return (
-    <main className="relative">
+    <motion.main
+      className="relative font-sans"
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 200, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Navbar />
       <div className="text-center bg-blue-900 text-white pt-32 pb-96 rounded-b-[10rem]">
         <h1 className="text-4xl font-bold">
@@ -68,6 +74,6 @@ export default function Price() {
       </div>
 
       <Footer />
-    </main>
+    </motion.main>
   );
 }

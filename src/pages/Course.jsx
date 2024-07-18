@@ -8,11 +8,12 @@ import Footer from '../components/Footer/Footer';
 import { FaSearch } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import { useLocation } from 'react-router-dom';
+import { delay, motion } from 'framer-motion';
 
 export default function Course() {
-  const [course, setcourse] = useState([]);
-  const [fillteredCourse, setFilteredCourse] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [course, setcourse] = useState([]); //nampung dari db
+  const [fillteredCourse, setFilteredCourse] = useState([]); //nampung dari db stelah difilter
+  const [filter, setFilter] = useState('all'); //nampung filter dari select 
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
@@ -20,7 +21,6 @@ export default function Course() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-  
     const getData = async () => {
       const courseCollection = collection(db, 'course');
 
@@ -46,7 +46,9 @@ export default function Course() {
       top: 0,
       behavior: 'smooth',
     });
+
     filterCourse();
+
   }, [filter, course, pathname]);
 
   const filterCourse = () => {
@@ -59,7 +61,6 @@ export default function Course() {
     }
 
     setFilteredCourse(filtered);
-    // setCurrentPage(0);
   };
 
   const handlePageChange = (selected) => {
@@ -69,14 +70,23 @@ export default function Course() {
   const pageCount = Math.ceil(fillteredCourse.length / itemsPerPage);
 
   return (
-    <>
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      className="font-sans"
+    >
       <Navbar />
 
-      <main className="mt-32">
+      <div className="mt-32 ">
         <Header title1={'Course'} title2={'List'} />
 
         <div className="flex justify-between items-center my-10 px-[3%] relative">
-          <FaSearch size={20} className="text-primary absolute lg:left-12 left-4" />
+          <FaSearch
+            size={20}
+            className="text-primary absolute lg:left-12 left-4"
+          />
           <input
             type="search"
             className="pl-10 pr-2 py-2 lg:w-80 w-44 outline-none placeholder:text-sm rounded-xl bg-gray-200 text-sm"
@@ -84,7 +94,9 @@ export default function Course() {
           />
 
           <div className="text-sm flex gap-2">
-            <label htmlFor="filter" className='hidden lg:block'>Sort by</label>
+            <label htmlFor="filter" className="hidden lg:block">
+              Sort by
+            </label>
             <select
               name="filter"
               id="filter"
@@ -102,8 +114,16 @@ export default function Course() {
         <div className="mt-6 lg:flex justify-center grid grid-cols-2 lg:grid-cols-4 items-center lg:gap-7 gap-4 lg:flex-wrap bg-gray-100 py-4 px-2 lg:px-0 ">
           {fillteredCourse
             .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
-            .map((course) => (
-              <CardCourse course={course} />
+            .map((course, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: -200, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 * index  }}
+              >
+                <CardCourse course={course} />
+              </motion.div>
             ))}
         </div>
 
@@ -119,9 +139,9 @@ export default function Course() {
           activeClassName={'active'}
           className="flex justify-center items-center gap-4"
         />
-      </main>
+      </div>
 
       <Footer />
-    </>
+    </motion.main>
   );
 }

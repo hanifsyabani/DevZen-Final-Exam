@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import { skillHighlight } from './components/HomePage/Hero/skillHighlight';
 import { AiFeatures } from './components/HomePage/Ai/AiFeatures';
 import CardCourse from './components/HomePage/Course/CardCourse';
 import { SkillFeatured } from './components/HomePage/WhoCanJoin/SkillFeatured';
-import Example from './components/HomePage/Gallery/Gallery';
-import { TextParallaxContentExample } from './components/HomePage/Gallery/TextParallax';
+import { TextParallax } from './components/HomePage/Gallery/TextParallax';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import CardAchievment from './components/HomePage/Achievment/CardAchievment';
 import { DataMentor } from './components/HomePage/Mentors/DataMentors';
+import Gallery from './components/HomePage/Gallery/Gallery';
 
 import heroimg from './assets/heroimg.png';
 import volcadot from './assets/volcadot.png';
@@ -37,14 +37,15 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame,
+  delay,
 } from 'framer-motion';
 
 import { wrap } from '@motionone/utils';
 
 function App() {
   const [course, setcourse] = useState([]);
-  const { pathname } = useLocation();
 
+  // get data
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -69,7 +70,7 @@ function App() {
     };
 
     getData();
-  }, [pathname]);
+  }, []);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -78,6 +79,7 @@ function App() {
     restDelta: 0.001,
   });
 
+  // text berjalan
   function ParallaxText({ children, baseVelocity = 100 }) {
     const baseX = useMotionValue(0);
     const { scrollY } = useScroll();
@@ -110,7 +112,7 @@ function App() {
     return (
       <div className="parallax">
         <motion.div
-          className="scroller text-5xl text-primary font-sans opacity-30 "
+          className="scroller lg:text-5xl text-primary font-sans opacity-30 italic"
           style={{ x }}
         >
           <span>{children} </span>
@@ -122,9 +124,10 @@ function App() {
       </div>
     );
   }
+  // text berjalan
 
   return (
-    <>
+    <div className="font-sans">
       <motion.div className="progress-bar" style={{ scaleX }} />
       <Navbar />
       <section className="px-[3%] py-20 lg:flex font-sans">
@@ -133,7 +136,7 @@ function App() {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.9 }}
-            className="lg:text-6xl text-5xl font-bold text-primary lg:max-w-xl"
+            className="lg:text-6xl text-4xl font-bold text-primary lg:max-w-xl text-center lg:text-left"
           >
             Transformasi Diri untuk Masa Depan Gemilang
           </motion.h1>
@@ -141,21 +144,24 @@ function App() {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.9 }}
-            className="pt-6 text-lg text-tertiary max-w-md"
+            className="pt-6 text-lg lg:text-left text-center text-tertiary max-w-md"
           >
             Dapatkan skill yang anda butuhkan untuk mencapai masa depan
           </motion.p>
 
-          <div className="flex items-center flex-wrap gap-4 mt-14">
+          <div className="flex items-center lg:justify-start justify-center flex-wrap gap-4 mt-14">
             {skillHighlight.map((item, index) => (
-              <div
+              <motion.div
+                initial={{ top: 100, opacity: 0 }}
+                animate={{ top: 0, opacity: 1 }}
+                transition={{ duration: 0.9, delay: 0.3 * index }}
                 key={item.id}
                 className="bg-[#F2F4F8] hover:bg-secondary ease-linear duration-300 py-2 px-4 rounded-lg w-46 group text-center cursor-pointer"
               >
-                <h1 className="group-hover:text-white text-[#B9B5B2] font-semibold">
+                <h1 className="group-hover:text-white text-gray-500 font-semibold">
                   {item.title}
                 </h1>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -163,7 +169,7 @@ function App() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.8 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
           className="lg:w-1/2"
         >
           <img src={heroimg} />
@@ -175,16 +181,28 @@ function App() {
         <ParallaxText baseVelocity={5}>Temukan kursus terbaik </ParallaxText>
       </section>
 
-      <section className="my-20 w-full px-[3%]  relative">
+      <section className="my-20 w-full px-[3%] relative">
         <div className="lg:flex items-center justify-center">
-          <div className="lg:w-1/2">
-            <h1 className="lg:text-5xl text-4xl font-bold text-primary tracking-wide leading-[3.2rem]">
+          <motion.div
+            initial={{ x: -200, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="lg:w-1/2"
+          >
+            <h1 className="lg:text-5xl text-3xl font-bold text-primary lg:tracking-wide lg:leading-[3.2rem] lg:text-left text-center">
               Platform Pembelajaran Online{' '}
               <span className="text-secondary">Berbasis AI di Indonesia</span>
             </h1>
-          </div>
+          </motion.div>
 
-          <div className="lg:w-1/2 mt-10 lg:mt-0">
+          <motion.div
+            initial={{ x: 200, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="lg:w-1/2 mt-10 lg:mt-0"
+          >
             <Swiper
               breakpoints={{
                 320: {
@@ -230,10 +248,14 @@ function App() {
                 ))}
               </div>
             </Swiper>
-          </div>
+          </motion.div>
         </div>
 
-        <img
+        <motion.img
+          initial={{ bounce: 0, opacity: 0 }}
+          whileInView={{ bounce: 0.5, opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.3 }}
+          viewport={{ once: true }}
           src={volcadot}
           alt="volcadot"
           className="w-44 mt-3 absolute -left-1"
@@ -242,7 +264,13 @@ function App() {
 
       <section className="mt-56 px-[3%]">
         <div className="lg:flex justify-center items-center gap-20 ">
-          <div className="lg:w-1/2">
+          <motion.div
+            className="lg:w-1/2"
+            initial={{ x: -300, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+          >
             <p className="text-secondary tracking-wide font-semibold">
               SIAPA YANG BISA BERGABUNG
             </p>
@@ -266,10 +294,16 @@ function App() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="w-[40%] hidden lg:block">
+          </motion.div>
+          <motion.div
+            initial={{ x: 300, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="w-[40%] hidden lg:block"
+          >
             <img src={skillimg} alt="skillimg" className="w-full" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -278,7 +312,15 @@ function App() {
 
         <div className="mt-6 grid grid-cols-2  lg:flex justify-center items-center gap-7 flex-wrap ">
           {course.map((course) => (
-            <CardCourse course={course} key={course.id} />
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3, bounce: 0.3 }}
+            >
+              <CardCourse course={course} />
+            </motion.div>
           ))}
         </div>
         <Link to={'/course'}>
@@ -290,7 +332,13 @@ function App() {
         </Link>
       </section>
 
-      <section className="mt-20 bg-[#F3F3F3] px-[3%] py-10 ">
+      <motion.section
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-20 bg-[#F3F3F3] px-[3%] py-10 "
+      >
         <Header title1="Pencapaian" title2="Kami" />
         <div className="lg:flex justify-center items-center mt-10 gap-32">
           <div className="lg:w-1/2">
@@ -304,7 +352,7 @@ function App() {
               <CardAchievment title={'Students Enrolled'} count={'100'} />
               <CardAchievment title={'Course tersedia'} count={'50'} />
             </div>
-            <div className="bg-white rounded-lg shadow-2xl flex justify-center items-center gap-10 mt-5 p-6 ">
+            <div className="bg-white rounded-lg shadow-2xl flex justify-center items-center gap-10 mt-5 p-6 hover:bg-primary hover:text-white transition-all cursor-pointer ">
               <h1 className="text-5xl font-extrabold text-secondary">75%</h1>
               <p className="max-w-46">
                 Para mahasiswa berhasil meraih karir di perusahaan ternama.
@@ -312,10 +360,10 @@ function App() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <section>
-        <Example />
+        <Gallery />
       </section>
 
       <section className="px-[3%] mt-20 py-10">
@@ -333,6 +381,10 @@ function App() {
             },
             640: {
               slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1600: {
+              slidesPerView: 4,
               spaceBetween: 10,
             },
           }}
@@ -398,11 +450,11 @@ function App() {
       </section>
 
       <section>
-        <TextParallaxContentExample />
+        <TextParallax />
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

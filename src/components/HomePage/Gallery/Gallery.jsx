@@ -1,7 +1,7 @@
 import { motion, useTransform, useScroll } from 'framer-motion';
 import { useRef } from 'react';
 
-const Example = () => {
+const Gallery = () => {
   return (
     <div className="mt-20">
       <div className="flex h-20 items-center justify-center"></div>
@@ -19,7 +19,7 @@ const HorizontalScrollCarousel = () => {
   const x = useTransform(scrollYProgress, [0, 1], ['1%', '-95%']);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-primary">
+    <section ref={targetRef} className="relative h-[200vh] bg-primary">
       <h1 className="text-4xl font-bold text-white text-center pt-8">
         Dokumentasi <span className="text-secondary">Program</span>
       </h1>
@@ -50,7 +50,7 @@ const Card = ({ card }) => {
   );
 };
 
-export default Example;
+export default Gallery;
 
 const cards = [
   {
@@ -60,26 +60,23 @@ const cards = [
   },
   {
     url: '/kegiatan2.jpeg',
-    title: 'Title 2',
     id: 2,
   },
   {
     url: '/kegiatan3.jpeg',
-    title: 'Title 3',
     id: 3,
   },
   {
     url: '/kegiatan4.jpeg',
-    title: 'Title 4',
     id: 4,
   },
   {
-    url: '/kegiatan5.jpeg',
+    url: '/kegiatan2.jpeg',
     title: 'Title 5',
     id: 5,
   },
   {
-    url: '/kegiatan6.png',
+    url: '/kegiatan3.jpeg',
     title: 'Title 6',
     id: 6,
   },

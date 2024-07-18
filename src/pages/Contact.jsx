@@ -14,6 +14,7 @@ import { db } from '../service/Firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { contactItem } from '../components/Contact/contactItem';
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Contact() {
   const { pathname } = useLocation();
@@ -84,7 +85,13 @@ export default function Contact() {
   }
 
   return (
-    <main className="relative">
+    <motion.main
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 200, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative font-sans"
+    >
       <Navbar />
       <div className="pb-72 pt-32  px-[5%] bg-secondary rounded-b-[10rem]">
         <h1 className="text-center text-4xl text-white font-bold">
@@ -107,7 +114,7 @@ export default function Contact() {
                       setValue({ ...value, fname: e.target.value })
                     }
                     value={value.fname}
-                    className=''
+                    className=""
                   />
                 </FormControl>
                 <FormControl isRequired className="mb-4">
@@ -187,15 +194,22 @@ export default function Contact() {
 
       <div className="lg:flex justify-center items-center gap-20 my-32 ">
         {contactItem.map((item, i) => (
-          <div className="lg:w-[30rem] p-4 shadow-sm text-center cursor-pointer group mb-10 lg:mb-0" key={i}>
-            <img src={item.img} alt="email" className="w-20 mx-auto group-hover:scale-110 transition-all" />
-            <h1 className='font-semibold my-6'>{item.desc}</h1>
-            <p className='text-primary font-semibold'>{item.link}</p>
+          <div
+            className="lg:w-[30rem] p-4 shadow-sm text-center cursor-pointer group mb-10 lg:mb-0"
+            key={i}
+          >
+            <img
+              src={item.img}
+              alt="email"
+              className="w-20 mx-auto group-hover:scale-110 transition-all"
+            />
+            <h1 className="font-semibold my-6">{item.desc}</h1>
+            <p className="text-primary font-semibold">{item.link}</p>
           </div>
         ))}
       </div>
 
       <Footer />
-    </main>
+    </motion.main>
   );
 }

@@ -13,6 +13,7 @@ import Footer from '../components/Footer/Footer';
 import vol from '../assets/vol_faq.png';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Faq() {
   const { pathname } = useLocation();
@@ -20,13 +21,18 @@ export default function Faq() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }, [pathname]);
 
-
   return (
-    <main className="relative">
+    <motion.main
+      initial={{ y: -200, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 200, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative font-sans"
+    >
       <Navbar />
       <div className="pb-72 pt-32 px-[5%] bg-secondary rounded-b-[10rem]">
         <h1 className="text-center text-4xl text-white font-bold">
@@ -69,6 +75,6 @@ export default function Faq() {
       </div>
 
       <Footer />
-    </main>
+    </motion.main>
   );
 }
