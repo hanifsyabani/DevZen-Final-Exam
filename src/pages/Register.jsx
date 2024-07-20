@@ -44,7 +44,7 @@ export default function Register() {
         })
       }
     } catch (error) {
-      setError(error.message)
+      setError("Invalid email or password")
     }
   }
 

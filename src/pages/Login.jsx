@@ -39,7 +39,7 @@ export default function Login() {
         });
       }
     } catch (error) {
-      setError(error.message);
+      setError("Invalid email or password");
     } finally {
       setLoading(false);
     }
