@@ -27,7 +27,7 @@ export default function Login() {
       );
       const user = credentials.user;
       if (user) {
-        navigate('/');
+        navigate('/home');
       } else {
         toast({
           title: 'Error',
