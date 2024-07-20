@@ -3,7 +3,7 @@ export const NavItem =[
   {
     id: 1,
     title: "Beranda",
-    link: "/",
+    link: "/home",
   },
   {
     id: 2,
