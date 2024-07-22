@@ -78,7 +78,14 @@ export default function Contact() {
         msg: '',
       });
     } catch (error) {
-      console.error('Error adding document: ', error);
+      toast({
+        title: 'Error',
+        description: 'Gagal mengirim pesan',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right',
+      })
     } finally {
       setLoading(false);
     }
