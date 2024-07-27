@@ -127,7 +127,7 @@ function App() {
   // text berjalan
 
   return (
-    <div className="font-sans">
+    <div className="font-sans ">
       <motion.div className="progress-bar" style={{ scaleX }} />
       <Navbar />
       <section className="px-[3%] py-20 lg:flex font-sans">
@@ -176,12 +176,12 @@ function App() {
         </motion.div>
       </section>
 
-      <section className="mb-32">
+      <section className="mb-32 overflow-x-hidden">
         <ParallaxText baseVelocity={-5}>Dev Zen Course</ParallaxText>
         <ParallaxText baseVelocity={5}>Temukan kursus terbaik </ParallaxText>
       </section>
 
-      <section className="my-20 w-full px-[3%] relative">
+      <section className="my-20 w-full px-[3%] relative ">
         <div className="lg:flex items-center justify-center">
           <motion.div
             initial={{ x: -200, opacity: 0 }}
@@ -262,7 +262,7 @@ function App() {
         />
       </section>
 
-      <section className="mt-56 px-[3%]">
+      <section className="mt-56 px-[3%] overflow-x-hidden ">
         <div className="lg:flex justify-center items-center gap-20 ">
           <motion.div
             className="lg:w-1/2"
